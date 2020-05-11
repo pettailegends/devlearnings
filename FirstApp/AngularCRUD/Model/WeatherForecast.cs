@@ -1,7 +1,7 @@
 using System;
 
-namespace AngularCRUD
-{
+namespace AngularCRUD.Model
+    {
     public class WeatherForecast
     {
         public DateTime Date { get; set; }
