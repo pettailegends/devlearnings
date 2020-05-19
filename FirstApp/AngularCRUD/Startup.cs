@@ -29,9 +29,8 @@ namespace AngularCRUD
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddDbContext<AppDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddResponseCaching();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

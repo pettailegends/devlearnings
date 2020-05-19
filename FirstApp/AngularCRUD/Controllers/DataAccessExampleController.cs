@@ -13,9 +13,12 @@ namespace AngularCRUD.Controllers
     [ApiController]
     public class DataAccessExampleController : ControllerBase
     {
+        [HttpGet]
+        [ResponseCache(Duration = 60,Location = ResponseCacheLocation.Any)]
         public IActionResult Get()
         {
             DataAccessSQL s = new DataAccessSQL();
+            //DataAccessOracle s = new DataAccessOracle();
             DataAccessService dservice = new DataAccessService(s);
             string ret = dservice.GetTablesNames(new Model.ConnectionInfo());
             return Ok(ret);
