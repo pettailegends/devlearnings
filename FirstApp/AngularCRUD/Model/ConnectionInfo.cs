@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,5 +12,7 @@ namespace AngularCRUD.Model
         public string Pwd { get; set; }
         public string UserName { get; set; }
         public string DataBaseName { get; set; }
+        [JsonIgnore]
+        public string RequestedByUserID { get; set; }
     }
 }

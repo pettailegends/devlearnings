@@ -1,4 +1,5 @@
 using AngularCRUD.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -31,6 +32,18 @@ namespace AngularCRUD
 
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddResponseCaching();
+
+            // 1. Add Authentication Services from Auth0
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = "https://shashanktestauth.auth0.com/";
+                options.Audience = "http://localhost:52843/";
+            });
+            // **************** end auth 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +65,9 @@ namespace AngularCRUD
             }
 
             app.UseRouting();
-
+            // 2. Enable authentication middleware from Auth0
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -72,6 +87,15 @@ namespace AngularCRUD
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+             
+            
+            
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //      name: "default",
+            //      template: "{controller=Home}/{action=Index}/{id?}");
+            //});
         }
     }
 }
