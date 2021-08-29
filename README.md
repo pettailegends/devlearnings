@@ -1,7 +1,8 @@
 # devlearnings
 learning trials
 editing for test purpose
-# Added by Ponniah
+# Added by Ponniah in Desktop
 New line added to test
-# Added from GitHun Editor
+# Added from GitHub Editor
 New line added by Ponniah
+This is basics of Git
